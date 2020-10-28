@@ -14,7 +14,6 @@ defmodule AuctionWeb.Application do
       # Start a worker by calling: AuctionWeb.Worker.start_link(arg)
       # {AuctionWeb.Worker, arg}
       {Phoenix.PubSub, name: AuctionWeb.PubSub}
-
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
