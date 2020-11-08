@@ -7,25 +7,26 @@ defmodule Auction.User do
     field(:email_address, :string)
     field(:password, :string, virtual: true)
     field(:hashed_password, :string)
+    has_many(:bids, Auction.Bid)
     timestamps()
   end
 
-  def changeset(user, params \\ %{}) do
+  def changeset(user, attrs \\ %{}) do
     user
-    |> cast(params, [:user_name, :email_address])
+    |> cast(attrs, [:user_name, :email_address])
     |> validate_required([:user_name, :email_address, :hashed_password])
     |> validate_length(:user_name, min: 3)
     |> unique_constraint(:user_name)
   end
 
-  def changeset_with_password(user, params \\ %{}) do
+  def changeset_with_password(user, attrs \\ %{}) do
     user
-    |> cast(params, [:password])
+    |> cast(attrs, [:password])
     |> validate_required(:password)
     |> validate_length(:password, min: 5)
     |> validate_confirmation(:password, required: true)
     |> hash_password()
-    |> changeset(params)
+    |> changeset(attrs)
   end
 
   defp hash_password(%Ecto.Changeset{changes: %{password: password}} = changeset) do

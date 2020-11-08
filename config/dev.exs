@@ -61,6 +61,7 @@ config :auction_web, AuctionWeb.Endpoint,
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
       ~r"lib/auction_web/(live|views)/.*(ex)$",
-      ~r"lib/auction_web/templates/.*(eex)$"
+      ~r"lib/auction_web/templates/.*(eex)$",
+      ~r"lib/auction_web/controllers/.*(ex)$"
     ]
   ]
