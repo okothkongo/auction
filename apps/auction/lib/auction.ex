@@ -77,4 +77,8 @@ defmodule Auction do
     |> Bid.bids_for_specific_user_query()
     |> Repo.all()
   end
+
+  def least_amount_bidded(item_id) do
+    Repo.one(Bid.bid_with_least_amount_query(item_id))
+  end
 end
