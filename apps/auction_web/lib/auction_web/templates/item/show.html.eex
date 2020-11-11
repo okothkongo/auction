@@ -5,13 +5,15 @@
 </ul>
   <div style="display: flex; flex-direction: row;">
     <div style="flex: 1;">
+     
       <h2>Current bids</h2>
-      <%= for bid <- @item.bids do %>
-      <p><%= integer_to_currency(bid.amount) %> <em>from <%= bid.user.user_name %></em></p>
-      <% end %>
+      <div id="bids">
+        <%= render_many @item.bids, AuctionWeb.BidView, "bid.html" %>
+      </div>
     </div>
   <div style="flex: 1;">
-    <%= if @current_user do %>
+    <%= if @current_user && is_bid_still_open?(@item.ends_at)  do %>
+      
       <h2>Place your bid!</h2>
       <%= form_for @bid, Routes.item_bid_path(@conn, :create, @item), fn f -> %>
         <%= if @bid.action do %>
