@@ -11,7 +11,8 @@ defmodule Auction.MixProject do
       lockfile: "../../mix.lock",
       elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      aliases: aliases()
     ]
   end
 
@@ -35,4 +36,7 @@ defmodule Auction.MixProject do
       {:pbkdf2_elixir, "~> 1.2"}
     ]
   end
+  def aliases do
+[test: ["ecto.create --quiet", "ecto.migrate", "test"]]
+end
 end
